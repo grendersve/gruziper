@@ -660,18 +660,7 @@ namespace АИС_грузоперевозки
             }
         }
 
-        // Метод для загрузки данных в DataGridView
-        //private void LoadRouteData()
-        //{
-        //    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT * FROM Маршрут", connection))
-        //    {
-        //        DataTable dataTable = new DataTable();
-        //        adapter.Fill(dataTable);
-        //        dataGridView4.DataSource = dataTable;
-        //    }
-        //}
-
-
+        
         private void button21_Click(object sender, EventArgs e)
         {
             // Получаем значения из полей ввода
@@ -864,16 +853,6 @@ namespace АИС_грузоперевозки
         }
 
 
-        //// Метод для удаления данных из таблицы country
-        //private void DeleteCarDataFromDatabase(string id)
-        //{
-        //    using (SQLiteCommand command = new SQLiteCommand(connection))
-        //    {
-        //        command.CommandText = "DELETE FROM Транспортное_средство WHERE ID = @id";
-        //        command.Parameters.AddWithValue("@id", id);
-        //        command.ExecuteNonQuery();
-        //    }
-        //}
     }
 }
 
