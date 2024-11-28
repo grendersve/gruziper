@@ -46,6 +46,9 @@
             this.button24 = new System.Windows.Forms.Button();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -119,9 +122,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox21 = new System.Windows.Forms.TextBox();
+            this.button13 = new System.Windows.Forms.Button();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -337,6 +340,36 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Маршрут";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(618, 438);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(97, 23);
+            this.button11.TabIndex = 15;
+            this.button11.Text = "Удалить";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(495, 438);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(95, 23);
+            this.button7.TabIndex = 14;
+            this.button7.Text = "Изменить";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(368, 438);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(105, 23);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "Добавить";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label27
             // 
@@ -821,6 +854,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.comboBox1);
+            this.tabPage1.Controls.Add(this.textBox21);
+            this.tabPage1.Controls.Add(this.button13);
             this.tabPage1.Controls.Add(this.label37);
             this.tabPage1.Controls.Add(this.textBox37);
             this.tabPage1.Controls.Add(this.textBox36);
@@ -1071,35 +1107,30 @@
             this.tabControl1.Size = new System.Drawing.Size(1051, 657);
             this.tabControl1.TabIndex = 0;
             // 
-            // button3
+            // comboBox1
             // 
-            this.button3.Location = new System.Drawing.Point(368, 438);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 23);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Добавить";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(37, 394);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 1;
             // 
-            // button7
+            // textBox21
             // 
-            this.button7.Location = new System.Drawing.Point(495, 438);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(95, 23);
-            this.button7.TabIndex = 14;
-            this.button7.Text = "Изменить";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.textBox21.Location = new System.Drawing.Point(37, 437);
+            this.textBox21.Name = "textBox21";
+            this.textBox21.Size = new System.Drawing.Size(100, 22);
+            this.textBox21.TabIndex = 2;
             // 
-            // button11
+            // button13
             // 
-            this.button11.Location = new System.Drawing.Point(618, 438);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(97, 23);
-            this.button11.TabIndex = 15;
-            this.button11.Text = "Удалить";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.button13.Location = new System.Drawing.Point(160, 437);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.TabIndex = 3;
+            this.button13.Text = "Искать";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // Form3
             // 
@@ -1226,5 +1257,8 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox21;
+        private System.Windows.Forms.Button button13;
     }
 }

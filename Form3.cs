@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 
@@ -30,6 +31,13 @@ namespace АИС_грузоперевозки
             LoadContractData();
             LoadRouteData();
             LoadCarData();
+            string q1 = "SELECT ID, Фамилия || ' ' || Имя AS Full FROM Клиент";
+            SQLiteDataAdapter da1 = new SQLiteDataAdapter(q1, connection);
+            DataTable dt1 = new DataTable();
+            da1.Fill(dt1);
+            comboBox1.DataSource = dt1;
+            comboBox1.DisplayMember = "Full"; // Отображаемое значение в комбобоксе
+            comboBox1.ValueMember = "ID";        // ID клиента
         }
 
         private void ConnectToDatabase()
@@ -775,6 +783,7 @@ namespace АИС_грузоперевозки
             }
         }
 
+        //Код для кнопок в разделе "Договор"
         private void button10_Click(object sender, EventArgs e)
         {
             // Проверка на заполненность полей
@@ -804,7 +813,6 @@ namespace АИС_грузоперевозки
         }
 
 
-        //Код для кнопок в разделе "Договор"
         private void button12_Click(object sender, EventArgs e)
         {
             if (dataGridView3.SelectedRows.Count > 0)
@@ -932,6 +940,31 @@ namespace АИС_грузоперевозки
 
             // Обновляем DataGridView
             LoadRouteData();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            {
+                string query;
+                if (string.IsNullOrEmpty(textBox9.Text))
+                {
+                    // Если поле поиска пустое, загрузить все данные
+                    query = "SELECT * FROM Specifications";
+                }
+                else
+                {
+                    //Поиск по выбранному критерию
+                    string selectedField = comboBox1.SelectedItem.ToString();
+                    string searchText = textBox9.Text;
+                    query = $"SELECT * FROM Specifications WHERE {selectedField} LIKE '%{searchText}%'";
+                }
+                adapter = new SQLiteDataAdapter(query, connection);
+                dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridView5.DataSource = dt;
+            }
+
+
         }
     }
 }
