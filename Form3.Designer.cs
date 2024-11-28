@@ -46,9 +46,6 @@
             this.button24 = new System.Windows.Forms.Button();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -122,6 +119,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -315,9 +315,9 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.button16);
-            this.tabPage4.Controls.Add(this.button15);
-            this.tabPage4.Controls.Add(this.button13);
+            this.tabPage4.Controls.Add(this.button11);
+            this.tabPage4.Controls.Add(this.button7);
+            this.tabPage4.Controls.Add(this.button3);
             this.tabPage4.Controls.Add(this.label27);
             this.tabPage4.Controls.Add(this.label26);
             this.tabPage4.Controls.Add(this.label25);
@@ -337,39 +337,6 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Маршрут";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(548, 425);
-            this.button16.Margin = new System.Windows.Forms.Padding(4);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(100, 28);
-            this.button16.TabIndex = 18;
-            this.button16.Text = "Удалить";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(440, 425);
-            this.button15.Margin = new System.Windows.Forms.Padding(4);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(100, 28);
-            this.button15.TabIndex = 17;
-            this.button15.Text = "Изменить";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(332, 425);
-            this.button13.Margin = new System.Windows.Forms.Padding(4);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(100, 28);
-            this.button13.TabIndex = 15;
-            this.button13.Text = "Добавить";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button10_Click);
             // 
             // label27
             // 
@@ -1104,6 +1071,36 @@
             this.tabControl1.Size = new System.Drawing.Size(1051, 657);
             this.tabControl1.TabIndex = 0;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(368, 438);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(105, 23);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "Добавить";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(495, 438);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(95, 23);
+            this.button7.TabIndex = 14;
+            this.button7.Text = "Изменить";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(618, 438);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(97, 23);
+            this.button11.TabIndex = 15;
+            this.button11.Text = "Удалить";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1153,9 +1150,6 @@
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.DataGridView dataGridView6;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
@@ -1229,5 +1223,8 @@
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBox20;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button3;
     }
 }

@@ -541,92 +541,92 @@ namespace АИС_грузоперевозки
 
 
 
-        private void button13_Click(object sender, EventArgs e)
-        {
-            // Проверка на заполненность полей
-            if (string.IsNullOrWhiteSpace(textBox23.Text) ||
-                string.IsNullOrWhiteSpace(textBox24.Text) ||
-                string.IsNullOrWhiteSpace(textBox25.Text) ||
-                string.IsNullOrWhiteSpace(textBox26.Text) ||
-                string.IsNullOrWhiteSpace(textBox27.Text))
-            {
-                MessageBox.Show("Все поля должны быть заполнены.");
-                return;
-            }
+        //private void button13_Click(object sender, EventArgs e)
+        //{
+        //    // Проверка на заполненность полей
+        //    if (string.IsNullOrWhiteSpace(textBox23.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox24.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox25.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox26.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox27.Text))
+        //    {
+        //        MessageBox.Show("Все поля должны быть заполнены.");
+        //        return;
+        //    }
 
-            // Получаем значения из полей ввода
-            string id = textBox23.Text;
-            string time_on_road = textBox24.Text;
-            string start = textBox25.Text;
-            string finish = textBox26.Text;
-            string distance = textBox27.Text;
+        //    // Получаем значения из полей ввода
+        //    string id = textBox23.Text;
+        //    string time_on_road = textBox24.Text;
+        //    string start = textBox25.Text;
+        //    string finish = textBox26.Text;
+        //    string distance = textBox27.Text;
 
-            // Вставляем данные в базу данных
-            InsertRouteDataToDatabase(id, time_on_road, start, finish, distance);
+        //    // Вставляем данные в базу данных
+        //    InsertRouteDataToDatabase(id, time_on_road, start, finish, distance);
 
-            // Обновляем DataGridView
-            LoadRouteData();
-        }
+        //    // Обновляем DataGridView
+        //    LoadRouteData();
+        //}
 
-        private void button15_Click(object sender, EventArgs e)
-        {
-            // Проверка на выбор строки в DataGridView
-            if (dataGridView4.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Выберите строку для обновления.");
-                return;
-            }
+        //private void button15_Click(object sender, EventArgs e)
+        //{
+        //    // Проверка на выбор строки в DataGridView
+        //    if (dataGridView4.SelectedRows.Count == 0)
+        //    {
+        //        MessageBox.Show("Выберите строку для обновления.");
+        //        return;
+        //    }
 
-            // Проверка на заполненность полей
-            if (string.IsNullOrWhiteSpace(textBox24.Text) ||
-                string.IsNullOrWhiteSpace(textBox25.Text) ||
-                string.IsNullOrWhiteSpace(textBox26.Text) ||
-                string.IsNullOrWhiteSpace(textBox27.Text))
-            {
-                MessageBox.Show("Все поля должны быть заполнены.");
-                return;
-            }
+        //    // Проверка на заполненность полей
+        //    if (string.IsNullOrWhiteSpace(textBox24.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox25.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox26.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox27.Text))
+        //    {
+        //        MessageBox.Show("Все поля должны быть заполнены.");
+        //        return;
+        //    }
 
-            // Получаем выбранную строку в DataGridView
-            DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
+        //    // Получаем выбранную строку в DataGridView
+        //    DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
 
-            // Обновляем данные в базе данных
-            UpdateRouteDataInDatabase(
-                selectedRow.Cells[0].Value.ToString(),
-                textBox24.Text,
-                textBox25.Text,
-                textBox26.Text,
-                textBox27.Text
-            );
+        //    // Обновляем данные в базе данных
+        //    UpdateRouteDataInDatabase(
+        //        selectedRow.Cells[0].Value.ToString(),
+        //        textBox24.Text,
+        //        textBox25.Text,
+        //        textBox26.Text,
+        //        textBox27.Text
+        //    );
 
-            // Обновляем DataGridView
-            LoadRouteData();
-        }
+        //    // Обновляем DataGridView
+        //    LoadRouteData();
+        //}
 
-        private void button16_Click(object sender, EventArgs e)
-        {
-            // Проверка на выбор строки в DataGridView
-            if (dataGridView4.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Выберите строку для удаления.");
-                return;
-            }
+        //private void button16_Click(object sender, EventArgs e)
+        //{
+        //    // Проверка на выбор строки в DataGridView
+        //    if (dataGridView4.SelectedRows.Count == 0)
+        //    {
+        //        MessageBox.Show("Выберите строку для удаления.");
+        //        return;
+        //    }
 
-            // Получаем выбранную строку в DataGridView
-            DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
+        //    // Получаем выбранную строку в DataGridView
+        //    DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
 
-            // Удаляем данные из базы данных
-            DeleteRouteDataFromDatabase(selectedRow.Cells[0].Value.ToString());
+        //    // Удаляем данные из базы данных
+        //    DeleteRouteDataFromDatabase(selectedRow.Cells[0].Value.ToString());
 
-            // Обновляем DataGridView
-            LoadRouteData();
-        }
+        //    // Обновляем DataGridView
+        //    LoadRouteData();
+        //}
 
         private void InsertRouteDataToDatabase(string id, string time_on_road, string start, string finish, string distance)
         {
             using (SQLiteCommand command = new SQLiteCommand(connection))
             {
-                command.CommandText = "INSERT INTO Маршрут (ID, time_on_road, start, finish, distance) VALUES (@id, @time_on_road, @start, @finish, @distance)";
+                command.CommandText = "INSERT INTO Маршрут (ID, Время_в_пути, Начальная_точка, Конечная_точка, Дистанция) VALUES (@id, @time_on_road, @start, @finish, @distance)";
                 command.Parameters.AddWithValue("@id", id);
                 command.Parameters.AddWithValue("@time_on_road", time_on_road);
                 command.Parameters.AddWithValue("@start", start);
@@ -640,7 +640,7 @@ namespace АИС_грузоперевозки
         {
             using (SQLiteCommand command = new SQLiteCommand(connection))
             {
-                command.CommandText = "UPDATE Маршрут SET time_on_road = @time_on_road, start = @start, finish = @finish, distance = @distance WHERE ID = @id";
+                command.CommandText = "UPDATE Маршрут SET Время_в_пути = @time_on_road, Начальная_точка = @start, Конечная_точка = @finish, Дистанция = @distance WHERE ID = @id";
                 command.Parameters.AddWithValue("@id", id);
                 command.Parameters.AddWithValue("@time_on_road", time_on_road);
                 command.Parameters.AddWithValue("@start", start);
@@ -852,7 +852,87 @@ namespace АИС_грузоперевозки
             LoadContractDataFromDatabase();
         }
 
+        //Код для кнопок в "Маршрут"
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Проверка на заполненность полей
+            if (string.IsNullOrWhiteSpace(textBox23.Text) ||
+                string.IsNullOrWhiteSpace(textBox24.Text) ||
+                string.IsNullOrWhiteSpace(textBox25.Text) ||
+                string.IsNullOrWhiteSpace(textBox26.Text) ||
+                string.IsNullOrWhiteSpace(textBox27.Text))
+            {
+                MessageBox.Show("Все поля должны быть заполнены.");
+                return;
+            }
 
+            // Получаем значения из полей ввода
+            string id = textBox23.Text;
+            string time_on_road = textBox24.Text;
+            string start = textBox25.Text;
+            string finish = textBox26.Text;
+            string distance = textBox27.Text;
+
+            // Вставляем данные в базу данных
+            InsertRouteDataToDatabase(id, time_on_road, start, finish, distance);
+
+            // Обновляем DataGridView
+            LoadRouteData();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // Проверка на выбор строки в DataGridView
+            if (dataGridView4.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите строку для обновления.");
+                return;
+            }
+
+            // Проверка на заполненность полей
+            if (string.IsNullOrWhiteSpace(textBox24.Text) ||
+                string.IsNullOrWhiteSpace(textBox25.Text) ||
+                string.IsNullOrWhiteSpace(textBox26.Text) ||
+                string.IsNullOrWhiteSpace(textBox27.Text))
+            {
+                MessageBox.Show("Все поля должны быть заполнены.");
+                return;
+            }
+
+            // Получаем выбранную строку в DataGridView
+            DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
+
+            // Обновляем данные в базе данных
+            UpdateRouteDataInDatabase(
+                selectedRow.Cells[0].Value.ToString(),
+                textBox24.Text,
+                textBox25.Text,
+                textBox26.Text,
+                textBox27.Text
+            );
+
+            // Обновляем DataGridView
+            LoadRouteData();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // Проверка на выбор строки в DataGridView
+            if (dataGridView4.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите строку для удаления.");
+                return;
+            }
+
+            // Получаем выбранную строку в DataGridView
+            DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
+
+            // Удаляем данные из базы данных
+            DeleteRouteDataFromDatabase(selectedRow.Cells[0].Value.ToString());
+
+            // Обновляем DataGridView
+            LoadRouteData();
+        }
     }
 }
 
