@@ -21,6 +21,8 @@ namespace АИС_грузоперевозки
     public partial class Form3 : Form
     {
         private SQLiteConnection connection;
+        private SQLiteDataAdapter adapter;
+        private DataTable dt;
 
         public Form3()
         {
@@ -31,6 +33,8 @@ namespace АИС_грузоперевозки
             LoadContractData();
             LoadRouteData();
             LoadCarData();
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+
             string q1 = "SELECT ID, Фамилия || ' ' || Имя AS Full FROM Клиент";
             SQLiteDataAdapter da1 = new SQLiteDataAdapter(q1, connection);
             DataTable dt1 = new DataTable();
@@ -40,6 +44,7 @@ namespace АИС_грузоперевозки
             comboBox1.ValueMember = "ID";        // ID клиента
         }
 
+        
         private void ConnectToDatabase()
         {
             string dbPath = "C:\\Users\\Даниил\\Desktop\\Gruzoperevozki.db";
@@ -272,6 +277,14 @@ namespace АИС_грузоперевозки
             }
         }
 
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+
+            }
+        }
+
         private void DeleteKlientDataFromDatabase(string id)
         {
             using (SQLiteCommand command = new SQLiteCommand(connection))
@@ -406,106 +419,104 @@ namespace АИС_грузоперевозки
         }
 
 
-        //private void button13_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // Проверка на заполненность полей
+            if (string.IsNullOrEmpty(textBox13.Text) || string.IsNullOrEmpty(textBox16.Text) || string.IsNullOrEmpty(textBox19.Text) ||
+                string.IsNullOrEmpty(textBox14.Text) || string.IsNullOrEmpty(textBox17.Text) || string.IsNullOrEmpty(textBox20.Text) ||
+                string.IsNullOrEmpty(textBox15.Text) || string.IsNullOrEmpty(textBox18.Text))
+            {
+                MessageBox.Show("Заполните все поля.");
+                return;
+            }
+
+            // Получаем значения из полей ввода
+            string id = textBox13.Text;
+            string price = textBox14.Text;
+            string date_order = textBox15.Text;
+            string customers_name = textBox16.Text;
+            string driver_name = textBox19.Text;
+            string numder_customer = textBox18.Text;
+            string number_driver = textBox17.Text;
+            string name_auto = textBox20.Text;
+
+            // Вставляем данные в базу данных
+            InsertContractDataToDatabase(price, date_order, customers_name, driver_name, numder_customer, number_driver, name_auto);
+
+            // Обновляем DataGridView
+            LoadContractDataFromDatabase();
+        }
+
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                // Получаем ID выбранной строки
+                string id = dataGridView3.SelectedRows[0].Cells[0].Value.ToString();
+
+                // Удаляем данные
+                DeleteContractDataFromDatabase(id);
+
+                // Обновляем DataGridView
+                LoadContractDataFromDatabase();
+            }
+            else
+            {
+                MessageBox.Show("Выберите строку для удаления.");
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            // Проверка на заполненность полей
+            if (string.IsNullOrEmpty(textBox14.Text) || string.IsNullOrEmpty(textBox15.Text) ||
+                string.IsNullOrEmpty(textBox16.Text) || string.IsNullOrEmpty(textBox19.Text) ||
+                string.IsNullOrEmpty(textBox18.Text) || string.IsNullOrEmpty(textBox17.Text) ||
+                string.IsNullOrEmpty(textBox20.Text))
+            {
+                MessageBox.Show("Заполните все поля.");
+                return;
+            }
+
+            // Получаем значения из полей ввода
+            string price = textBox14.Text;
+            string date_order = textBox15.Text;
+            string customers_name = textBox16.Text;
+            string driver_name = textBox19.Text;
+            string number_customer = textBox18.Text;
+            string number_driver = textBox17.Text;
+            string name_auto = textBox20.Text;
+
+            // Вставляем данные в базу данных
+            InsertContractDataToDatabase(price, date_order, customers_name, driver_name, number_customer, number_driver, name_auto);
+
+            // Обновляем DataGridView
+            LoadContractDataFromDatabase();
+        }
+
+        //private void InsertContractDataToDatabase(string price, string date_order, string customers_name, string driver_name, string number_customer, string number_driver, string name_auto)
         //{
-        //    // Проверка на заполненность полей
-        //    if (string.IsNullOrEmpty(textBox13.Text) || string.IsNullOrEmpty(textBox16.Text) || string.IsNullOrEmpty(textBox19.Text) ||
-        //        string.IsNullOrEmpty(textBox14.Text) || string.IsNullOrEmpty(textBox17.Text) || string.IsNullOrEmpty(textBox20.Text) ||
-        //        string.IsNullOrEmpty(textBox15.Text) || string.IsNullOrEmpty(textBox18.Text))
-        //    {
-        //        MessageBox.Show("Заполните все поля.");
-        //        return;
-        //    }
-
-        //    // Получаем значения из полей ввода
-        //    string id = textBox13.Text;
-        //    string price = textBox14.Text;
-        //    string date_order = textBox15.Text;
-        //    string customers_name = textBox16.Text;
-        //    string driver_name = textBox19.Text;
-        //    string numder_customer = textBox18.Text;
-        //    string number_driver = textBox17.Text;
-        //    string name_auto = textBox20.Text;
-
-        //    // Вставляем данные в базу данных
-        //    InsertContractDataToDatabase(id, price, date_order, customers_name, driver_name, numder_customer, number_driver, name_auto);
-
-        //    // Обновляем DataGridView
-        //    LoadContractDataFromDatabase();
+        //    throw new NotImplementedException();
         //}
 
-        //private void button15_Click(object sender, EventArgs e)
-        //{
-        //    if (dataGridView3.SelectedRows.Count > 0)
-        //    {
-        //        // Получаем выбранную строку
-        //        DataGridViewRow selectedRow = dataGridView3.SelectedRows[0];
-
-        //        // Проверка на заполненность полей
-        //        if (string.IsNullOrEmpty(textBox13.Text) || string.IsNullOrEmpty(textBox16.Text) || string.IsNullOrEmpty(textBox19.Text) ||
-        //        string.IsNullOrEmpty(textBox14.Text) || string.IsNullOrEmpty(textBox17.Text) || string.IsNullOrEmpty(textBox20.Text) ||
-        //        string.IsNullOrEmpty(textBox15.Text) || string.IsNullOrEmpty(textBox18.Text))
-        //        {
-        //            MessageBox.Show("Заполните все поля.");
-        //            return;
-        //        }
-
-        //        // Обновляем данные
-        //        UpdateContractDataInDatabase(
-        //            selectedRow.Cells[0].Value.ToString(), // ID из DataGridView
-        //            textBox14.Text,
-        //            textBox15.Text,
-        //            textBox16.Text,
-        //            textBox17.Text,
-        //            textBox18.Text,
-        //            textBox19.Text,
-        //            textBox20.Text
-        //        );
-
-        //        // Обновляем DataGridView
-        //        LoadContractDataFromDatabase();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Выберите строку для обновления.");
-        //    }
-        //}
-
-        //private void button16_Click(object sender, EventArgs e)
-        //{
-        //    if (dataGridView3.SelectedRows.Count > 0)
-        //    {
-        //        // Получаем ID выбранной строки
-        //        string id = dataGridView3.SelectedRows[0].Cells[0].Value.ToString();
-
-        //        // Удаляем данные
-        //        DeleteContractDataFromDatabase(id);
-
-        //        // Обновляем DataGridView
-        //        LoadContractDataFromDatabase();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Выберите строку для удаления.");
-        //    }
-        //}
-
-        private void InsertContractDataToDatabase(string id, string price, string date_order, string customers_name, string driver_name, string numder_customer, string number_driver, string name_auto)
+        private void InsertContractDataToDatabase(string price, string date_order, string customers_name, string driver_name, string number_customer, string number_driver, string name_auto)
         {
             using (SQLiteCommand command = new SQLiteCommand(connection))
             {
-                command.CommandText = "INSERT INTO Договор (ID, Цена_груза, Дата_оформления_заказа, ФИО_Заказчика, ФИО_Водителя, Номер_телефона_заказчика, Номер_телефона_водителя, Название_автомобиля) VALUES (@id, @price, @date_order, @customers_name, @driver_name, @numder_customer, @number_driver, @name_auto)";
-                command.Parameters.AddWithValue("@id", id);
+                command.CommandText = "INSERT INTO Договор (Цена_груза, Дата_оформления_заказа , ФИО_Заказчика, ФИО_Водителя, Номер_телефона_заказчика, Номер_телефона_водителя, Название_автомобиля) VALUES (@price, @date_order, @customers_name, @driver_name, @number_customer, @number_driver, @name_auto)";
                 command.Parameters.AddWithValue("@price", price);
                 command.Parameters.AddWithValue("@date_order", date_order);
                 command.Parameters.AddWithValue("@customers_name", customers_name);
                 command.Parameters.AddWithValue("@driver_name", driver_name);
-                command.Parameters.AddWithValue("@numder_customer", numder_customer);
+                command.Parameters.AddWithValue("@number_customer", number_customer);
                 command.Parameters.AddWithValue("@number_driver", number_driver);
                 command.Parameters.AddWithValue("@name_auto", name_auto);
+
                 command.ExecuteNonQuery();
             }
         }
+
 
         private void UpdateContractDataInDatabase(string id, string price, string date_order, string customers_name, string driver_name, string numder_customer, string number_driver, string name_auto)
         {
@@ -549,86 +560,86 @@ namespace АИС_грузоперевозки
 
 
 
-        //private void button13_Click(object sender, EventArgs e)
-        //{
-        //    // Проверка на заполненность полей
-        //    if (string.IsNullOrWhiteSpace(textBox23.Text) ||
-        //        string.IsNullOrWhiteSpace(textBox24.Text) ||
-        //        string.IsNullOrWhiteSpace(textBox25.Text) ||
-        //        string.IsNullOrWhiteSpace(textBox26.Text) ||
-        //        string.IsNullOrWhiteSpace(textBox27.Text))
-        //    {
-        //        MessageBox.Show("Все поля должны быть заполнены.");
-        //        return;
-        //    }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Проверка на заполненность полей
+            if (string.IsNullOrWhiteSpace(textBox23.Text) ||
+                string.IsNullOrWhiteSpace(textBox24.Text) ||
+                string.IsNullOrWhiteSpace(textBox25.Text) ||
+                string.IsNullOrWhiteSpace(textBox26.Text) ||
+                string.IsNullOrWhiteSpace(textBox27.Text))
+            {
+                MessageBox.Show("Все поля должны быть заполнены.");
+                return;
+            }
 
-        //    // Получаем значения из полей ввода
-        //    string id = textBox23.Text;
-        //    string time_on_road = textBox24.Text;
-        //    string start = textBox25.Text;
-        //    string finish = textBox26.Text;
-        //    string distance = textBox27.Text;
+            // Получаем значения из полей ввода
+            string id = textBox23.Text;
+            string time_on_road = textBox24.Text;
+            string start = textBox25.Text;
+            string finish = textBox26.Text;
+            string distance = textBox27.Text;
 
-        //    // Вставляем данные в базу данных
-        //    InsertRouteDataToDatabase(id, time_on_road, start, finish, distance);
+            // Вставляем данные в базу данных
+            InsertRouteDataToDatabase(id, time_on_road, start, finish, distance);
 
-        //    // Обновляем DataGridView
-        //    LoadRouteData();
-        //}
+            // Обновляем DataGridView
+            LoadRouteData();
+        }
 
-        //private void button15_Click(object sender, EventArgs e)
-        //{
-        //    // Проверка на выбор строки в DataGridView
-        //    if (dataGridView4.SelectedRows.Count == 0)
-        //    {
-        //        MessageBox.Show("Выберите строку для обновления.");
-        //        return;
-        //    }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // Проверка на выбор строки в DataGridView
+            if (dataGridView4.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите строку для обновления.");
+                return;
+            }
 
-        //    // Проверка на заполненность полей
-        //    if (string.IsNullOrWhiteSpace(textBox24.Text) ||
-        //        string.IsNullOrWhiteSpace(textBox25.Text) ||
-        //        string.IsNullOrWhiteSpace(textBox26.Text) ||
-        //        string.IsNullOrWhiteSpace(textBox27.Text))
-        //    {
-        //        MessageBox.Show("Все поля должны быть заполнены.");
-        //        return;
-        //    }
+            // Проверка на заполненность полей
+            if (string.IsNullOrWhiteSpace(textBox24.Text) ||
+                string.IsNullOrWhiteSpace(textBox25.Text) ||
+                string.IsNullOrWhiteSpace(textBox26.Text) ||
+                string.IsNullOrWhiteSpace(textBox27.Text))
+            {
+                MessageBox.Show("Все поля должны быть заполнены.");
+                return;
+            }
 
-        //    // Получаем выбранную строку в DataGridView
-        //    DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
+            // Получаем выбранную строку в DataGridView
+            DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
 
-        //    // Обновляем данные в базе данных
-        //    UpdateRouteDataInDatabase(
-        //        selectedRow.Cells[0].Value.ToString(),
-        //        textBox24.Text,
-        //        textBox25.Text,
-        //        textBox26.Text,
-        //        textBox27.Text
-        //    );
+            // Обновляем данные в базе данных
+            UpdateRouteDataInDatabase(
+                selectedRow.Cells[0].Value.ToString(),
+                textBox24.Text,
+                textBox25.Text,
+                textBox26.Text,
+                textBox27.Text
+            );
 
-        //    // Обновляем DataGridView
-        //    LoadRouteData();
-        //}
+            // Обновляем DataGridView
+            LoadRouteData();
+        }
 
-        //private void button16_Click(object sender, EventArgs e)
-        //{
-        //    // Проверка на выбор строки в DataGridView
-        //    if (dataGridView4.SelectedRows.Count == 0)
-        //    {
-        //        MessageBox.Show("Выберите строку для удаления.");
-        //        return;
-        //    }
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // Проверка на выбор строки в DataGridView
+            if (dataGridView4.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите строку для удаления.");
+                return;
+            }
 
-        //    // Получаем выбранную строку в DataGridView
-        //    DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
+            // Получаем выбранную строку в DataGridView
+            DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
 
-        //    // Удаляем данные из базы данных
-        //    DeleteRouteDataFromDatabase(selectedRow.Cells[0].Value.ToString());
+            // Удаляем данные из базы данных
+            DeleteRouteDataFromDatabase(selectedRow.Cells[0].Value.ToString());
 
-        //    // Обновляем DataGridView
-        //    LoadRouteData();
-        //}
+            // Обновляем DataGridView
+            LoadRouteData();
+        }
 
         private void InsertRouteDataToDatabase(string id, string time_on_road, string start, string finish, string distance)
         {
@@ -784,184 +795,190 @@ namespace АИС_грузоперевозки
         }
 
         //Код для кнопок в разделе "Договор"
-        private void button10_Click(object sender, EventArgs e)
-        {
-            // Проверка на заполненность полей
-            if (string.IsNullOrEmpty(textBox13.Text) || string.IsNullOrEmpty(textBox16.Text) || string.IsNullOrEmpty(textBox19.Text) ||
-                string.IsNullOrEmpty(textBox14.Text) || string.IsNullOrEmpty(textBox17.Text) || string.IsNullOrEmpty(textBox20.Text) ||
-                string.IsNullOrEmpty(textBox15.Text) || string.IsNullOrEmpty(textBox18.Text))
-            {
-                MessageBox.Show("Заполните все поля.");
-                return;
-            }
+        //private void button10_Click(object sender, EventArgs e)
+        //{
+        //    // Проверка на заполненность полей
+        //    if (string.IsNullOrEmpty(textBox13.Text) || string.IsNullOrEmpty(textBox16.Text) || string.IsNullOrEmpty(textBox19.Text) ||
+        //        string.IsNullOrEmpty(textBox14.Text) || string.IsNullOrEmpty(textBox17.Text) || string.IsNullOrEmpty(textBox20.Text) ||
+        //        string.IsNullOrEmpty(textBox15.Text) || string.IsNullOrEmpty(textBox18.Text))
+        //    {
+        //        MessageBox.Show("Заполните все поля.");
+        //        return;
+        //    }
 
-            // Получаем значения из полей ввода
-            string id = textBox13.Text;
-            string price = textBox14.Text;
-            string date_order = textBox15.Text;
-            string customers_name = textBox16.Text;
-            string driver_name = textBox19.Text;
-            string numder_customer = textBox18.Text;
-            string number_driver = textBox17.Text;
-            string name_auto = textBox20.Text;
+        //    // Получаем значения из полей ввода
+        //    string id = textBox13.Text;
+        //    string price = textBox14.Text;
+        //    string date_order = textBox15.Text;
+        //    string customers_name = textBox16.Text;
+        //    string driver_name = textBox19.Text;
+        //    string numder_customer = textBox18.Text;
+        //    string number_driver = textBox17.Text;
+        //    string name_auto = textBox20.Text;
 
-            // Вставляем данные в базу данных
-            InsertContractDataToDatabase(id, price, date_order, customers_name, driver_name, numder_customer, number_driver, name_auto);
+        //    // Вставляем данные в базу данных
+        //    InsertContractDataToDatabase(id, price, date_order, customers_name, driver_name, numder_customer, number_driver, name_auto);
 
-            // Обновляем DataGridView
-            LoadContractDataFromDatabase();
-        }
+        //    // Обновляем DataGridView
+        //    LoadContractDataFromDatabase();
+        //}
 
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-            if (dataGridView3.SelectedRows.Count > 0)
-            {
-                // Получаем ID выбранной строки
-                string id = dataGridView3.SelectedRows[0].Cells[0].Value.ToString();
+        //private void button12_Click(object sender, EventArgs e)
+        //{
+        //    if (dataGridView3.SelectedRows.Count > 0)
+        //    {
+        //        // Получаем ID выбранной строки
+        //        string id = dataGridView3.SelectedRows[0].Cells[0].Value.ToString();
 
-                // Удаляем данные
-                DeleteContractDataFromDatabase(id);
+        //        // Удаляем данные
+        //        DeleteContractDataFromDatabase(id);
 
-                // Обновляем DataGridView
-                LoadContractDataFromDatabase();
-            }
-            else
-            {
-                MessageBox.Show("Выберите строку для удаления.");
-            }
-        }
+        //        // Обновляем DataGridView
+        //        LoadContractDataFromDatabase();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Выберите строку для удаления.");
+        //    }
+        //}
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            // Проверка на заполненность полей
-            if (string.IsNullOrEmpty(textBox13.Text) || string.IsNullOrEmpty(textBox16.Text) || string.IsNullOrEmpty(textBox19.Text) ||
-                string.IsNullOrEmpty(textBox14.Text) || string.IsNullOrEmpty(textBox17.Text) || string.IsNullOrEmpty(textBox20.Text) ||
-                string.IsNullOrEmpty(textBox15.Text) || string.IsNullOrEmpty(textBox18.Text))
-            {
-                MessageBox.Show("Заполните все поля.");
-                return;
-            }
+        //private void button9_Click(object sender, EventArgs e)
+        //{
+        //    // Проверка на заполненность полей
+        //    if (string.IsNullOrEmpty(textBox14.Text) || string.IsNullOrEmpty(textBox15.Text) ||
+        //        string.IsNullOrEmpty(textBox16.Text) || string.IsNullOrEmpty(textBox19.Text) ||
+        //        string.IsNullOrEmpty(textBox18.Text) || string.IsNullOrEmpty(textBox17.Text) ||
+        //        string.IsNullOrEmpty(textBox20.Text))
+        //    {
+        //        MessageBox.Show("Заполните все поля.");
+        //        return;
+        //    }
 
-            // Получаем значения из полей ввода
-            string id = textBox13.Text;
-            string price = textBox14.Text;
-            string date_order = textBox15.Text;
-            string customers_name = textBox16.Text;
-            string driver_name = textBox19.Text;
-            string numder_customer = textBox18.Text;
-            string number_driver = textBox17.Text;
-            string name_auto = textBox20.Text;
+        //    // Получаем значения из полей ввода
+        //    string price = textBox14.Text;
+        //    string date_order = textBox15.Text;
+        //    string customers_name = textBox16.Text;
+        //    string driver_name = textBox19.Text;
+        //    string number_customer = textBox18.Text;
+        //    string number_driver = textBox17.Text;
+        //    string name_auto = textBox20.Text;
 
-            // Вставляем данные в базу данных
-            InsertContractDataToDatabase(id, price, date_order, customers_name, driver_name, numder_customer, number_driver, name_auto);
+        //    // Вставляем данные в базу данных
+        //    InsertContractDataToDatabase(price, date_order, customers_name, driver_name, number_customer, number_driver, name_auto);
 
-            // Обновляем DataGridView
-            LoadContractDataFromDatabase();
-        }
+        //    // Обновляем DataGridView
+        //    LoadContractDataFromDatabase();
+        //}
+
+        //private void InsertContractDataToDatabase(string price, string date_order, string customers_name, string driver_name, string number_customer, string number_driver, string name_auto)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
 
         //Код для кнопок в "Маршрут"
-        private void button3_Click(object sender, EventArgs e)
-        {
-            // Проверка на заполненность полей
-            if (string.IsNullOrWhiteSpace(textBox23.Text) ||
-                string.IsNullOrWhiteSpace(textBox24.Text) ||
-                string.IsNullOrWhiteSpace(textBox25.Text) ||
-                string.IsNullOrWhiteSpace(textBox26.Text) ||
-                string.IsNullOrWhiteSpace(textBox27.Text))
-            {
-                MessageBox.Show("Все поля должны быть заполнены.");
-                return;
-            }
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    // Проверка на заполненность полей
+        //    if (string.IsNullOrWhiteSpace(textBox23.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox24.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox25.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox26.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox27.Text))
+        //    {
+        //        MessageBox.Show("Все поля должны быть заполнены.");
+        //        return;
+        //    }
 
-            // Получаем значения из полей ввода
-            string id = textBox23.Text;
-            string time_on_road = textBox24.Text;
-            string start = textBox25.Text;
-            string finish = textBox26.Text;
-            string distance = textBox27.Text;
+        //    // Получаем значения из полей ввода
+        //    string id = textBox23.Text;
+        //    string time_on_road = textBox24.Text;
+        //    string start = textBox25.Text;
+        //    string finish = textBox26.Text;
+        //    string distance = textBox27.Text;
 
-            // Вставляем данные в базу данных
-            InsertRouteDataToDatabase(id, time_on_road, start, finish, distance);
+        //    // Вставляем данные в базу данных
+        //    InsertRouteDataToDatabase(id, time_on_road, start, finish, distance);
 
-            // Обновляем DataGridView
-            LoadRouteData();
-        }
+        //    // Обновляем DataGridView
+        //    LoadRouteData();
+        //}
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            // Проверка на выбор строки в DataGridView
-            if (dataGridView4.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Выберите строку для обновления.");
-                return;
-            }
+        //private void button7_Click(object sender, EventArgs e)
+        //{
+        //    // Проверка на выбор строки в DataGridView
+        //    if (dataGridView4.SelectedRows.Count == 0)
+        //    {
+        //        MessageBox.Show("Выберите строку для обновления.");
+        //        return;
+        //    }
 
-            // Проверка на заполненность полей
-            if (string.IsNullOrWhiteSpace(textBox24.Text) ||
-                string.IsNullOrWhiteSpace(textBox25.Text) ||
-                string.IsNullOrWhiteSpace(textBox26.Text) ||
-                string.IsNullOrWhiteSpace(textBox27.Text))
-            {
-                MessageBox.Show("Все поля должны быть заполнены.");
-                return;
-            }
+        //    // Проверка на заполненность полей
+        //    if (string.IsNullOrWhiteSpace(textBox24.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox25.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox26.Text) ||
+        //        string.IsNullOrWhiteSpace(textBox27.Text))
+        //    {
+        //        MessageBox.Show("Все поля должны быть заполнены.");
+        //        return;
+        //    }
 
-            // Получаем выбранную строку в DataGridView
-            DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
+        //    // Получаем выбранную строку в DataGridView
+        //    DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
 
-            // Обновляем данные в базе данных
-            UpdateRouteDataInDatabase(
-                selectedRow.Cells[0].Value.ToString(),
-                textBox24.Text,
-                textBox25.Text,
-                textBox26.Text,
-                textBox27.Text
-            );
+        //    // Обновляем данные в базе данных
+        //    UpdateRouteDataInDatabase(
+        //        selectedRow.Cells[0].Value.ToString(),
+        //        textBox24.Text,
+        //        textBox25.Text,
+        //        textBox26.Text,
+        //        textBox27.Text
+        //    );
 
-            // Обновляем DataGridView
-            LoadRouteData();
-        }
+        //    // Обновляем DataGridView
+        //    LoadRouteData();
+        //}
 
-        private void button11_Click(object sender, EventArgs e)
-        {
-            // Проверка на выбор строки в DataGridView
-            if (dataGridView4.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Выберите строку для удаления.");
-                return;
-            }
+        //private void button11_Click(object sender, EventArgs e)
+        //{
+        //    // Проверка на выбор строки в DataGridView
+        //    if (dataGridView4.SelectedRows.Count == 0)
+        //    {
+        //        MessageBox.Show("Выберите строку для удаления.");
+        //        return;
+        //    }
 
-            // Получаем выбранную строку в DataGridView
-            DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
+        //    // Получаем выбранную строку в DataGridView
+        //    DataGridViewRow selectedRow = dataGridView4.SelectedRows[0];
 
-            // Удаляем данные из базы данных
-            DeleteRouteDataFromDatabase(selectedRow.Cells[0].Value.ToString());
+        //    // Удаляем данные из базы данных
+        //    DeleteRouteDataFromDatabase(selectedRow.Cells[0].Value.ToString());
 
-            // Обновляем DataGridView
-            LoadRouteData();
-        }
+        //    // Обновляем DataGridView
+        //    LoadRouteData();
+        //}
 
         private void button13_Click(object sender, EventArgs e)
         {
             {
                 string query;
-                if (string.IsNullOrEmpty(textBox9.Text))
+                if (string.IsNullOrEmpty(textBox21.Text))
                 {
                     // Если поле поиска пустое, загрузить все данные
-                    query = "SELECT * FROM Specifications";
+                    query = "SELECT * FROM Клиент";
                 }
                 else
                 {
                     //Поиск по выбранному критерию
                     string selectedField = comboBox1.SelectedItem.ToString();
-                    string searchText = textBox9.Text;
-                    query = $"SELECT * FROM Specifications WHERE {selectedField} LIKE '%{searchText}%'";
+                    string searchText = textBox21.Text;
+                    query = $"SELECT * FROM Клиент WHERE {selectedField} LIKE '%{searchText}%'";
                 }
                 adapter = new SQLiteDataAdapter(query, connection);
                 dt = new DataTable();
-                adapter.Fill(dt);
-                dataGridView5.DataSource = dt;
+                int v = adapter.Fill(dt);
+                dataGridView1.DataSource = dt;
             }
 
 
