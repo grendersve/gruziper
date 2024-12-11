@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace АИС_салона_по_аренде_автомобилей
+namespace АИС_грузоперевозки
 {
     public partial class Form2 : Form
     {
@@ -23,17 +23,17 @@ namespace АИС_салона_по_аренде_автомобилей
         private void UserForm_Load(object sender, EventArgs e)
         {
             ConnectToDatabase();
-            LoadAutomobileData();
+            LoadKlientData();
         }
 
         private void ConnectToDatabase()
         {
-            string dbPath = "E:\\Autosalon.db";
+            string dbPath = "C:\\Users\\Даниил\\Desktop\\Gruzoperevozki.db";
             connection = new SQLiteConnection($"Data Source={dbPath}");
             connection.Open();
         }
 
-        private void LoadAutomobileData()
+        private void LoadKlientData()
         {
             connection.Open();
 
@@ -58,6 +58,11 @@ namespace АИС_салона_по_аренде_автомобилей
                 }
 
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

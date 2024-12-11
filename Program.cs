@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using АИС_грузоперевозки;
 
-namespace АИС_салона_по_аренде_автомобилей
+namespace АИС_грузоперевозки
 {
     internal static class Program
     {

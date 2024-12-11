@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using АИС_грузоперевозки;
 
-namespace АИС_салона_по_аренде_автомобилей
+namespace АИС_грузоперевозки
 {
     public partial class Form1 : Form
     {
@@ -43,6 +43,11 @@ namespace АИС_салона_по_аренде_автомобилей
         {
             // Заменяем каждый символ вводимого пароля на '*'
             textBox2.PasswordChar = '*';
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
