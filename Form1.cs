@@ -9,8 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using АИС_грузоперевозки;
+using АИС_салона_по_аренде_автомобилей;
 
-namespace АИС_салона_по_аренде_автомобилей
+namespace АИС_грузоперевозки
 {
     public partial class Form1 : Form
     {
@@ -21,7 +22,7 @@ namespace АИС_салона_по_аренде_автомобилей
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "user")
+            if (textBox1.Text == "klient")
             {
                 Form2 userForm = new Form2();
                 userForm.ShowDialog();
@@ -44,5 +45,11 @@ namespace АИС_салона_по_аренде_автомобилей
             // Заменяем каждый символ вводимого пароля на '*'
             textBox2.PasswordChar = '*';
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
