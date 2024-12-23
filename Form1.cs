@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using АИС_грузоперевозки;
+using АИС_салона_по_аренде_автомобилей;
 
 namespace АИС_грузоперевозки
 {
@@ -49,5 +50,15 @@ namespace АИС_грузоперевозки
         {
 
         }
+
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //        Form2 form2 = new Form2(textBox1.Text, textBox2.Text);
+        //        form2.ShowDialog();
+        //        this.Close(); // Закрыть текущую форму после открытия формы Form4
+
+
+        //}
+
     }
 }
