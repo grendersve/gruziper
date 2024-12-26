@@ -277,7 +277,6 @@ namespace АИС_салона_по_аренде_автомобилей
             }
         }
 
-
         private void button17_Click(object sender, EventArgs e)
         {
             // Очищаем поле поиска и сбрасываем выбранный критерий
